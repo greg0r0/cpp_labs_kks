@@ -25,6 +25,23 @@ TEST (_PRIORITY_QUEUE_Test, __pop_Test)
     EXPECT_EQ(test.pop(), 5);
 }
 
+TEST (_PRIORITY_QUEUE_Test, __len_test)
+{
+    lab1::priority_queue<int> test;
+    test.push(1);
+    test.push(2);
+    test.push(3);
+    test.push(5);
+    test.push(4);
+    EXPECT_EQ(test.len(), 5);
+}
+
+TEST (_PRIORITY_QUEUE_Test, __is_empty_test)
+{
+    lab1::priority_queue<int> test;
+    ASSERT_TRUE(test.is_empty());
+}
+
 TEST (_PRIORITY_QUEUE_Test, __little_test)
 {
     lab1::priority_queue<int> test;
@@ -37,6 +54,7 @@ TEST (_PRIORITY_QUEUE_Test, __little_test)
     EXPECT_EQ(test.pop(), 5);
     EXPECT_EQ(test.pop(), 4);
 }
+
 
 TEST (_PRIORITY_QUEUE_Test, __big_test)
 {
