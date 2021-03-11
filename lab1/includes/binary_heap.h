@@ -6,28 +6,6 @@
 #include <string>
 namespace lab1
 {
-    // template <typename TData>
-    // class binary_heap_node
-    // {
-    // private:
-    //     TData data;
-
-    //     binary_heap_node<TData> left, right;
-
-    // public:
-    //     binary_heap_node() {}
-    //     binary_heap_node(TData d) : data(d) {}
-    //     binary_heap_node(TData d, binary_heap_node<TData> _left, binary_heap_node<TData> _right) : data(d), left(_left), right(_right) {}
-
-    //     TData get_data() { return this->data; }
-    //     binary_heap_node<TData> get_left()  { return this->left;  }
-    //     binary_heap_node<TData> get_right() { return this->right; }
-
-    //     void set_data(TData _data) { this->data = _data; }
-    //     void set_left_node(binary_heap_node<TData> _node)  { this->left = _node;  }
-    //     void set_right_node(binary_heap_node<TData> _node) { this->right = _node; }
-    // };
-
 /*
     container must realize functionality of dynamic array with methods
     - push_back
@@ -84,6 +62,11 @@ namespace lab1
             this->heap_size--;
             this->heapify(0);
             return top;
+        }
+
+        const TData& get_head() const
+        {
+            return this->heap[0];
         }
 
         void heapify(unsigned int index) // sort heap (for pop)
