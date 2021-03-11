@@ -23,14 +23,27 @@ namespace lab1
         {
            return this->data.pop();
         }
+
         void push(T element)
         {
             this->data.push(element);
         }
+
         const T& get_head() const
         {
             return this->data.get_head();
         }
+
+        unsigned int len() const
+        {
+            return this->data.get_len();
+        }
+
+        bool is_empty()
+        {
+            return (this->len() == 0);
+        }
+
     };
 }
 #endif

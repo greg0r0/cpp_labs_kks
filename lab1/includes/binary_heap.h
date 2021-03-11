@@ -99,7 +99,7 @@ namespace lab1
 
         }
 
-        unsigned int get_len()
+        unsigned int get_len() const
         {
             return this->heap_size;
         }
