@@ -17,5 +17,14 @@ compile-test:
 run-test:
 	@./bin/tests &2>/dev/null
 
+example: compile-example run-example
+
+compile-example:
+	@mkdir -p ./bin/
+	@g++ ./sources/example.cpp -o ./bin/example
+	
+run-example:
+	@./bin/example
+
 clear:
 	rm -rf ./bin/
