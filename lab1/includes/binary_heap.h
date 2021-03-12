@@ -49,9 +49,14 @@ namespace lab1
                     TData t = this->heap[curr_index];
                     this->heap[curr_index] = this->heap[parent];
                     this->heap[parent] = t;
+                    
+                    curr_index = parent;
+                    parent = (curr_index-1)/2;
                 }
-                curr_index = parent;
-                parent = (curr_index-1)/2;
+                else
+                {
+                    break;
+                }
             }
         }
 
