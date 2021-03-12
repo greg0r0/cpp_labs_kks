@@ -17,7 +17,7 @@ compile-test:
 	@$(CC) ./tests/*.cpp -lgtest_main -lgtest -pthread -o ./bin/tests
 
 run-test:
-	@./bin/tests &2>/dev/null
+	@./bin/tests 
 
 example: compile-example run-example
 
