@@ -88,13 +88,8 @@ TEST (_PRIORITY_QUEUE_Test, __mix_test)
     test.push(2);
     test.push(4);
     test.push(3);
-    test.print();
     ASSERT_EQ(test.pop(), 5);
-    std::cout << test.len() << std::endl;
-    test.print();
     test.push(100);
-    std::cout << test.len() << std::endl;
-    test.print();
     ASSERT_EQ(test.get_head(),100);
 }
 
