@@ -49,7 +49,7 @@ namespace lab1
                     TData t = this->heap[curr_index];
                     this->heap[curr_index] = this->heap[parent];
                     this->heap[parent] = t;
-                    
+
                     curr_index = parent;
                     parent = (curr_index-1)/2;
                 }
@@ -109,6 +109,7 @@ namespace lab1
             return this->heap_size;
         }
 
+        //print "pretify" view
         void print(unsigned int index, unsigned int pos)
         {
             unsigned int left = 2*index + 1;
@@ -129,6 +130,7 @@ namespace lab1
 
         }
 
+        //print in linear view
         void print()
         {
             for (int i = 0; i < this->heap_size ; i++)
