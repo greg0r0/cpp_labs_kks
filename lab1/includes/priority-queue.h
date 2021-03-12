@@ -44,6 +44,11 @@ namespace lab1
             return (this->len() == 0);
         }
 
+        void print()
+        {
+            this->data.print(0,0);
+        }
+
     };
 }
 #endif

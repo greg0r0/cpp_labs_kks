@@ -34,36 +34,31 @@ namespace lab1
             this->heap_size = 1;
         }
 
-        void push(TData data) // add element
+
+        void push(TData data)
         {
-            this->heap.push_back(data);
-            this->heap_size+=1;
+            this->heap_size++;
             int curr_index = this->heap_size-1;
-            int parent = (curr_index-1)/2;
+            this->heap.push_back(data);
+            int parent_id = (curr_index-1)/2;
 
-            while (parent >= 0 && curr_index >0)
+            while (curr_index > 0 && this->heap[parent_id] < this->heap[curr_index])
             {
+                TData tmp = this->heap[curr_index];
+                this->heap[curr_index] = this->heap[parent_id];
+                this->heap[parent_id]=tmp;
 
-                if (this->heap[curr_index] > this->heap[parent])
-                {
-                    TData t = this->heap[curr_index];
-                    this->heap[curr_index] = this->heap[parent];
-                    this->heap[parent] = t;
-
-                    curr_index = parent;
-                    parent = (curr_index-1)/2;
-                }
-                else
-                {
-                    break;
-                }
+                curr_index = parent_id;
+                parent_id = (curr_index-1)/2;
             }
+
         }
 
         TData pop() // get element from head
         {
             TData top = this->heap[0];
             this->heap[0] = this->heap[ this->heap_size - 1 ];
+            this->heap.pop_back();
             this->heap_size--;
             this->heapify(0);
             return top;
@@ -130,7 +125,7 @@ namespace lab1
 
         }
 
-        //print in linear view
+        //print in linear mode
         void print()
         {
             for (int i = 0; i < this->heap_size ; i++)
