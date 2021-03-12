@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 #include "../includes/binary_heap.h"
 #include "../includes/priority-queue.h"
-
+#include <iostream>
 TEST (_PRIORITY_QUEUE_Test, __get_head_test)
 {
     lab1::priority_queue<int> test;
@@ -78,3 +78,23 @@ TEST (_PRIORITY_QUEUE_Test, __big_test)
         k=data;
     }
 }
+
+TEST (_PRIORITY_QUEUE_Test, __mix_test)
+{
+    lab1::priority_queue<int> test;
+   
+    test.push(1);
+    test.push(5);
+    test.push(2);
+    test.push(4);
+    test.push(3);
+    test.print();
+    ASSERT_EQ(test.pop(), 5);
+    std::cout << test.len() << std::endl;
+    test.print();
+    test.push(100);
+    std::cout << test.len() << std::endl;
+    test.print();
+    ASSERT_EQ(test.get_head(),100);
+}
+
