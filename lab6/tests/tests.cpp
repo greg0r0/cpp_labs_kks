@@ -168,3 +168,49 @@ TEST (_alg_KMP_Test, __test_7)
     auto res = lab6::alg_KMP(s6,p6);
     ASSERT_EQ(res, expect_res6);
 }
+
+/*
+    FSM generator
+*/
+
+TEST (_alg_FSM_Test, __test_1)
+{
+    auto res = lab6::alg_KMP(s0,p0);
+    ASSERT_EQ(res, expect_res0);
+}
+
+TEST (_alg_FSM_Test, __test_2)
+{
+    auto res = lab6::alg_KMP(s1,p1);
+    ASSERT_EQ(res, expect_res1);
+}
+
+TEST (_alg_FSM_Test, __test_3)
+{
+    auto res = lab6::alg_KMP(s2,p2);
+    ASSERT_EQ(res, expect_res2);
+}
+
+TEST (_alg_FSM_Test, __test_4)
+{
+    auto res = lab6::alg_KMP(s3,p3);
+    ASSERT_EQ(res, expect_res3);
+}
+
+TEST (_alg_FSM_Test, __test_5)
+{
+    auto res = lab6::alg_KMP(s4,p4);
+    ASSERT_EQ(res, expect_res4);
+}
+
+TEST (_alg_FSM_Test, __test_6)
+{
+    auto res = lab6::alg_KMP(s5,p5);
+    ASSERT_EQ(res, expect_res5);
+}
+
+TEST (_alg_FSM_Test, __test_7)
+{
+    auto res = lab6::alg_KMP(s6,p6);
+    ASSERT_EQ(res, expect_res6);
+}

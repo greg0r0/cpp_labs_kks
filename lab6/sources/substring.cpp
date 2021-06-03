@@ -1,8 +1,11 @@
 #include "../includes/substring.hpp"
 #include <vector>
 #include <map>
+#include <set>
+#include <array>
 #include <string>
 #include <algorithm>
+#include <memory>
 
 
 #ifdef DEBUG
@@ -230,9 +233,129 @@ std::vector<int> lab6::alg_KMP(std::string orig, std::string _template) //Кну
 
     return result;
 }
+
+int get_suffix_data(std::string p, std::string pc)
+{
+    #ifdef DEBUG
+        std::cout << "      [!] DEBUG::finite_machine::p=" << p << std::endl;
+        std::cout << "      [!] DEBUG::finite_machine::pc=" << pc << std::endl;
+    #endif
+
+    int max_result = 0;
+
+    for (int i = 1; i <= pc.size(); i++)
+    {
+        int result = 0;
+        std::string suf;
+        std::reverse_copy(pc.begin(), pc.begin()+i, std::back_inserter(suf));
+
+        std::string p_copy;
+        std::reverse_copy(p.begin(), p.end(), std::back_inserter(p_copy));
+
+        for (int j = 0; j < suf.size(); j++)
+        {
+            if (suf[j] == p_copy[j])
+            {
+                result++;
+            } 
+            else
+            {
+                result = 0;
+                break;
+            }
+        }
+
+        if (result > max_result)
+            max_result = result;
+    }
+
+    return max_result;
+}
+
 std::vector<int> lab6::alg_finite_machine(std::string orig, std::string _template)
 {
     std::vector<int> result;
-    //TODO
+    std::set<char> chrs;
+    std::map< char, std::vector<int> > FSM;
+
+    for (auto i : orig) { chrs.insert(i); }
+    for (auto i : _template) { chrs.insert(i); }
+
+    for (auto sym : chrs)
+    {
+        FSM[sym] = std::vector<int>(_template.size()+1, 0);
+       
+    }
+
+    #ifdef DEBUG
+        std::cout << "[!] DEBUG::finite_machine::charset_template= [";
+        for (auto a: chrs)
+        std::cout << a << ", ";
+        std::cout << "]" << std::endl;
+    #endif
+
+    // stage 1 : generate finite machine table
+    int index = 0;
+    for ( auto it = _template.begin()+1; it <= _template.end()+1; it++)
+    {
+        std::string pref(_template.begin(), it);
+        std::string sub_pref(_template.begin(), it-1);
+        
+        #ifdef DEBUG
+                std::cout << "[!] DEBUG::finite_machine::pref="<<pref << std::endl;
+        #endif
+
+        for (auto i:chrs)
+        {
+            auto get_data = get_suffix_data(sub_pref+i, pref);
+
+            #ifdef DEBUG
+                std::cout << "   [!] DEBUG::finite_machine::sub_pref="<< (sub_pref+i) << " data="<<get_data << std::endl;
+            #endif
+
+            FSM[i][index] = get_data;
+        }
+
+        index++;
+
+    }
+    #ifdef DEBUG
+    std::cout << "[!] DEBUG::finite_machine::FSM"<<std::endl;
+    for (auto [key, value] : FSM)
+    {
+        std::cout << key << " "<< std::endl;
+        for (int i = 0; i <= _template.size(); i++)
+            std::cout << value[i] << " ";
+        std::cout << std::endl;
+    }
+    #endif
+
+    //core
+
+    int state = 0;
+
+    for (int i = 0; i < orig.size(); i++)
+    {
+        state = FSM[ orig[i] ][state];
+        #ifdef DEBUG
+            std::cout << "[!] DEBUG::finite_machine::NEXT_STATE "<< state << std::endl;
+        #endif
+        if (state == _template.size())
+        {
+            #ifdef DEBUG
+                std::cout << "[!] DEBUG::finite_machine::FOUND_AT "<< (i - _template.size() + 1) << std::endl;
+            #endif
+            result.push_back(i - _template.size() + 1);
+        }
+    }
+
+    // for (auto c : chrs)
+    // {
+    //     #ifdef DEBUG
+    //         std::cout << "[!] DEBUG::finite_machine::delete at "<<  FSM[c] << std::endl;
+    //     #endif
+    //     delete FSM[c];
+    // }
+
     return result;
 }
