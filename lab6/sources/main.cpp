@@ -3,10 +3,9 @@
 #include <string>
 int main()
 {
-    std::cout << "test" << std::endl;
-    std::string a = "i'm, simple little text";
-    std::string p = "simple";
-    auto i = lab6::alg_rabin_karp(a,p);
+    std::string a = "aaaaaaaaaa";
+    std::string p = "#a";
+    auto i = lab6::alg_KMP(a,p);
     for (auto c : i)
     {
         std::cout << c << std::endl;

@@ -188,7 +188,46 @@ std::vector<int> lab6::alg_rabin_karp(std::string orig, std::string _template) /
 std::vector<int> lab6::alg_KMP(std::string orig, std::string _template) //Кнута-Морриса-Пратта
 {
     std::vector<int> result;
-    //TODO
+    int prefix_table[_template.size()]{0};
+    //generate prefix table
+    int k = 0;
+    for (int i = 1; i < _template.size(); i++)
+    {
+        while (k > 0 && _template[k] != _template[i])
+        {
+            k = prefix_table[k-1];
+        }
+
+        if (_template[k] == _template[i])
+            k++;
+        
+        prefix_table[i] = k;
+    }
+
+    #ifdef DEBUG
+        std::cout << "[!] DEBUG::alg_boyer_mur::prefix_table = [ "; 
+        for (auto i : prefix_table) { std::cout << i << ", "; }
+        std::cout << "];" << std::endl;
+    #endif
+    //core
+    k = 0;
+    for (int i = 0; i < orig.size(); i++)
+    {
+        while ((k > 0) && (_template[k] != orig[i]))
+            k = prefix_table[k-1];
+        if (_template[k] == orig[i])
+            k++;
+
+        if (k == _template.size())
+        {
+            #ifdef DEBUG
+                std::cout << "[!] DEBUG::alg_rabin_karp::FOUND_AT=" << i - _template.size() + 1 << std::endl;
+            #endif
+            result.push_back(i - _template.size() + 1);
+            k = prefix_table[k-1];
+        }
+    }
+
     return result;
 }
 std::vector<int> lab6::alg_finite_machine(std::string orig, std::string _template)
